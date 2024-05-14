@@ -1,0 +1,6 @@
+<div class="dashboard">
+  <app-magic-form (formSubmit)="formSubmit($event)" />
+  <div class="dashboard-cardlist">
+    <app-magic-booster *ngFor="let booster of boosterList" [booster] = "booster"/>
+  </div>
+</div>
