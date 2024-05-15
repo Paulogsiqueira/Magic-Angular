@@ -19,22 +19,32 @@ export class MagicDashboardComponent {
   cardList: Card[] = [];
   loading: boolean = false;
 
-  boosterSelected = async (block: string) =>{
+  boosterSelected = async (block: string) => {
     this.loading = true;
-    this.boosterList = []
-    while (this.cardList.length < 30) {
-      const cards = await getCards(block);
-      cards.forEach((card) => {
-        this.cardList.push(card);
-        if(this.loading == true){
-          this.loading = false
-        }
+    this.boosterList = [];
+    this.cardList = [];
+  
+    const promises = Array.from({ length: 5 }, () => getCards(block));
+  
+    try {
+      const responses = await Promise.all(promises);
+  
+      responses.forEach((cards) => {
+        cards.forEach((card) => {
+          this.cardList.push(card);
+        });
       });
+  
+      if (this.cardList.length > 30) {
+        this.cardList.splice(30);
+      }
+  
+      this.loading = false;
+    } catch (error) {
+      console.error("Erro ao processar a solicitação:", error);
+      this.loading = false;
     }
-    if (this.cardList.length > 30) {
-      this.cardList.splice(30);
-    }
-  }
+  };
 
   formSubmit = async (nameBlock: string[]) => {
     this.cardList = []
