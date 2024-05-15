@@ -1,24 +1,16 @@
 import axios from 'axios';
 import { Card } from '../interfaces/interfaces';
 
-export const getCards = async (block: string,amount: number ) => {
+export const getCards = async (block: string, amount: number) => {
   try {
-    const req = await axios.get(
-      `https://api.magicthegathering.io/v1/sets/${block}/booster`
-    );
-
-    const requests = [];
-    for (let i = 0; i < amount; i++) {
-      requests.push(req);
-    }
     let cards: Card[] = [];
-    const response = await axios.all(requests);
-    for (let i = 0; i < response.length; i++) {
-      response[i].data.cards.forEach((element: Card) => {
-        if (element.types.includes('Creature')) {
-          cards.push(element);
+    while( cards.length < amount){
+      const response = await axios.get(`https://api.magicthegathering.io/v1/sets/${block}/booster`);
+      response.data.cards.forEach((card: Card) => {
+        if(card.types.includes("Creature")){
+          cards.push(card);
         }
-      });
+      })
     }
     return cards;
   } catch (error) {

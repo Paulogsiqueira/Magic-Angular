@@ -1,8 +1,19 @@
 <div class="dashboard">
-  <app-magic-form (formSubmit)="formSubmit($event)" />
+  <app-magic-form (formSubmit)="formSubmit($event)" [loading]="loading" />
+  <app-delete-button *ngIf="cardsSelected.length > 0" (click)="deleteSelectedCards()"/>
   <div class="dashboard-cardlist">
-    <app-magic-booster (boosterSelected)="boosterSelected($event)" *ngFor="let booster of boosterList" [booster] = "booster"/>
-    <app-magic-card *ngFor="let card of cardList; let i = index" [card] = "card" [index]="i"/>
+    <app-magic-booster
+      (boosterSelected)="boosterSelected($event)"
+      *ngFor="let booster of boosterList"
+      [booster]="booster"
+    />
+    <app-magic-card
+      *ngFor="let card of cardList; let i = index"
+      [card]="card"
+      [index]="i"
+      (selectCardEvent)="cardSelected($event)"
+      [cardsSelected]="cardsSelected"
+    />
     <app-magic-loading *ngIf="loading" />
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,6 +22,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MagicFormComponent {
   selectedValue: string = '';
+  @Input() loading?: boolean;
   @Output()
   formSubmit = new EventEmitter<string[]>();
 

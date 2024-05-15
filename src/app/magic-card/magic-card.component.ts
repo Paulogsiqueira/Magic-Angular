@@ -1,20 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from '../../interfaces/interfaces';
 import { icons } from '../data/data';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-magic-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './magic-card.component.html',
   styleUrl: './magic-card.component.sass',
 })
 export class MagicCardComponent {
   @Input() card?: Card;
   @Input() index?: number;
+  @Input() cardsSelected: number[] = [];
+  @Output()
+  selectCardEvent = new EventEmitter<number>();
   newText: string = '';
   newManaCost: string = '';
   newColorIdentity: string = '';
+  cardSelected: boolean = false;
 
   ngOnInit() {
     this.newText = this.refactorText(this.card?.text || '');
@@ -26,7 +31,6 @@ export class MagicCardComponent {
     this.newColorIdentity = this.refactorColorIdentity(
       colorIdentityString || ''
     );
-    //console.log(this.index)
 
     let els = Array.from(
       document.getElementsByClassName(
@@ -53,4 +57,14 @@ export class MagicCardComponent {
     );
     return replacedIcons;
   };
+
+  selectCard = () =>{
+    if(this.cardsSelected.length < 5){
+      this.cardSelected = !this.cardSelected;
+      this.selectCardEvent.emit(this.index)
+    }else if(this.cardsSelected.length == 5 && this.cardSelected == true){
+      this.cardSelected = false
+      this.selectCardEvent.emit(this.index)
+    }
+  }
 }

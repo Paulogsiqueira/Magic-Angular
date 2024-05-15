@@ -1,4 +1,4 @@
-<div class="magic-card">
+<div class="magic-card" [ngClass]="{'selected': cardSelected}" (click)="selectCard()">
   <p class="magic-card__identity" [innerHTML]="newColorIdentity"></p>
   <div class="magic-card__info">
     <div class="magic-card__img">

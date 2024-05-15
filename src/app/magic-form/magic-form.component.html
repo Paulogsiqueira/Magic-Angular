@@ -13,7 +13,7 @@
         <mat-option value="onslaught">Onslaught</mat-option>
       </mat-select>
     </mat-form-field>
-    <button class="form-field__button" mat-raised-button color="primary" [disabled]="!selectedValue" [ngClass]="{'disabled-button': !selectedValue}">
+    <button class="form-field__button" mat-raised-button color="primary" [disabled]="!selectedValue || loading" [ngClass]="{'disabled-button': !selectedValue}">
       Buscar
     </button>
   </form>
