@@ -17,7 +17,7 @@ import { DeleteButtonComponent } from '../buttons/delete-button/delete-button.co
     CommonModule,
     MagicCardComponent,
     MagicLoadingComponent,
-    DeleteButtonComponent
+    DeleteButtonComponent,
   ],
   templateUrl: './magic-dashboard.component.html',
   styleUrl: './magic-dashboard.component.sass',
@@ -33,9 +33,15 @@ export class MagicDashboardComponent {
     this.block = block;
     this.loading = true;
     this.boosterList = [];
-    const cards = await getCards(block, 30);
+    let cards = await getCards(block, 5);
     if (cards.length > 30) {
       cards.splice(30);
+    } else if (cards.length < 30) {
+      const newCards = await getCards(block, 2);
+      cards = [...cards, ...newCards];
+      if (cards.length > 30) {
+        cards.splice(30);
+      }
     }
     this.cardList = cards;
     this.loading = false;
@@ -54,20 +60,22 @@ export class MagicDashboardComponent {
     }
   };
 
-  deleteSelectedCards = async() =>{
-    let newCardList = this.cardList.filter((value,index) => !this.cardsSelected.includes(index))
-    let cardsDelete = this.cardsSelected.length
+  deleteSelectedCards = async () => {
+    let newCardList = this.cardList.filter(
+      (value, index) => !this.cardsSelected.includes(index)
+    );
+    let cardsDelete = this.cardsSelected.length;
     this.cardsSelected = [];
-    this.cardList = []
-    this.loading = true
-    const newCards = await getCards(this.block,cardsDelete)
-    newCards.forEach((value) =>{
-        newCardList.push(value)
-    })
+    this.cardList = [];
+    this.loading = true;
+    const newCards = await getCards(this.block, 2);
+    newCards.forEach((value) => {
+      newCardList.push(value);
+    });
     if (newCardList.length > 30) {
       newCardList.splice(30);
     }
-    this.loading = false
-    this.cardList = newCardList
-  }
+    this.loading = false;
+    this.cardList = newCardList;
+  };
 }
