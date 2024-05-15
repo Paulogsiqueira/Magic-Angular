@@ -11,34 +11,46 @@ import { icons } from '../data/data';
 })
 export class MagicCardComponent {
   @Input() card?: Card;
+  @Input() index?: number;
   newText: string = '';
   newManaCost: string = '';
   newColorIdentity: string = '';
 
   ngOnInit() {
-    this.newText = this.refactorText(this.card?.text ||'');
-    this.newManaCost = this.refactorText(this.card?.manaCost ||'');
-    const colorIdentityString = this.card?.colorIdentity != undefined ? this.card?.colorIdentity.join(' ') : '';
-    this.newColorIdentity = this.refactorColorIdentity(colorIdentityString || '')
+    this.newText = this.refactorText(this.card?.text || '');
+    this.newManaCost = this.refactorText(this.card?.manaCost || '');
+    const colorIdentityString =
+      this.card?.colorIdentity != undefined
+        ? this.card?.colorIdentity.join(' ')
+        : '';
+    this.newColorIdentity = this.refactorColorIdentity(
+      colorIdentityString || ''
+    );
+    //console.log(this.index)
+
+    let els = Array.from(
+      document.getElementsByClassName(
+        'magic-text__icons'
+      ) as HTMLCollectionOf<HTMLElement>
+    );
+
+    for (const el of els) {
+      el.setAttribute('style', 'vertical-align: text-bottom');
+    }
   }
-  refactorColorIdentity = (text:string) =>{
+  refactorColorIdentity = (text: string) => {
     const replacedText = text.replace(
       /[A-Z]/g,
       (replaced) => `<img src=${icons[replaced]} />`
     );
-    return replacedText
-  }
+    return replacedText;
+  };
 
   refactorText = (text: string) => {
-    const replacedIcons= text.replace(
-      /\{[A-Z]\}/g,
-      (replaced) => `<img src=${icons[replaced]} />`
+    const replacedIcons = text.replace(
+      /\{(?:[1-4]|[A-Z])\}/g,
+      (replaced) => `<img class="magic-text__icons" src=${icons[replaced]} />`
     );
-    const replacedNumber = replacedIcons.replace(
-      /\{[1-4]\}/g,
-      (replaced) => `<img src=${icons[replaced]} />`
-    );
-
-    return replacedNumber
+    return replacedIcons;
   };
 }
