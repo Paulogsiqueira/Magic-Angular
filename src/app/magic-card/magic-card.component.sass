@@ -1,0 +1,33 @@
+.magic-card
+    display: flex
+    flex-direction: column
+    min-width: 250px
+    width: 30vw
+    border: 2px solid #929393
+    border-radius: 10px
+    background-color: #6b6b6b8c
+    color: #e8e9e9
+    margin: 10px 5px
+    padding: 10px
+    &:hover
+        scale: 1.02
+        cursor: pointer
+    .magic-card__identity
+        width: 100%
+        text-align: end
+
+.magic-card__info
+    display: flex
+    flex-direction: row
+    .magic-card__details
+        margin-left: 30px
+        h2
+            margin-bottom: 5px
+            font-family: "Lobster", sans-serif
+            font-size: 30px
+            margin-bottom: 20px
+        .magic-card__mana
+            margin-bottom: 60px
+    .magic-card__img
+        img
+            width: 200px

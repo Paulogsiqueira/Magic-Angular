@@ -1,6 +1,8 @@
 <div class="dashboard">
   <app-magic-form (formSubmit)="formSubmit($event)" />
   <div class="dashboard-cardlist">
-    <app-magic-booster *ngFor="let booster of boosterList" [booster] = "booster"/>
+    <app-magic-booster (boosterSelected)="boosterSelected($event)" *ngFor="let booster of boosterList" [booster] = "booster"/>
+    <app-magic-card *ngFor="let card of cardList" [card] = "card"/>
+    <app-magic-loading *ngIf="loading" />
   </div>
 </div>

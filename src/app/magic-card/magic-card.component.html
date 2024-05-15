@@ -1,0 +1,16 @@
+<div class="magic-card">
+  <div class="magic-card__identity">{{card?.colorIdentity}}</div>
+  <div class="magic-card__info">
+    <div class="magic-card__img">
+      <img
+        src={{card?.imageUrl}}
+        alt="Card image"
+      />
+    </div>
+    <div class="magic-card__details">
+      <h2>{{card?.name}}</h2>
+      <p class="magic-card__mana">{{card?.manaCost}}</p>
+      <p>{{card?.text}}</p>
+    </div>
+  </div>
+</div>

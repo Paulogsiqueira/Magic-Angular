@@ -1,4 +1,4 @@
-<div class="magic-booster">
+<div class="magic-booster" (click)="boosterChoiced(booster?.code || '')">
     <h2>{{booster?.name}}</h2>
     <p class="magic-boster__block">{{booster?.block}}</p>
     <div class="magic-boster__date">

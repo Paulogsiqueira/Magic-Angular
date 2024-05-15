@@ -1,9 +1,9 @@
 <form class="form-fields" (ngSubmit)="onSubmit(nomeInput.value, selectedValue)">
-    <mat-form-field class="form-field-input">
+    <mat-form-field class="form-field__input">
       <mat-label>Nome</mat-label>
       <input matInput #nomeInput  />
     </mat-form-field>
-    <mat-form-field class="form-field-input">
+    <mat-form-field class="form-field__input">
       <mat-label>Bloco</mat-label>
       <mat-select required [(ngModel)]="selectedValue" name="block">
         <mat-option value="amonkhet">Amonkhet</mat-option>
@@ -13,7 +13,7 @@
         <mat-option value="onslaught">Onslaught</mat-option>
       </mat-select>
     </mat-form-field>
-    <button class="form-field-button" mat-raised-button color="primary" [disabled]="!selectedValue" [ngClass]="{'disabled-button': !selectedValue}">
+    <button class="form-field__button" mat-raised-button color="primary" [disabled]="!selectedValue" [ngClass]="{'disabled-button': !selectedValue}">
       Buscar
     </button>
   </form>
