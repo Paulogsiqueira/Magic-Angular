@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { MagicFormComponent } from '../magic-form/magic-form.component';
-import { MagicBoosterComponent } from '../magic-booster/magic-booster.component';
-import { CommonModule } from '@angular/common';
-import { MagicCardComponent } from '../magic-card/magic-card.component';
-import { Booster, Card } from '../../interfaces/interfaces';
-import { MagicLoadingComponent } from '../magic-loading/magic-loading.component';
-import { getBoosters, getCards } from '../../methods/methods';
 import { DeleteButtonComponent } from '../buttons/delete-button/delete-button.component';
+import { MagicBoosterComponent } from '../magic-booster/magic-booster.component';
+import { MagicLoadingComponent } from '../magic-loading/magic-loading.component';
+import { MagicCardComponent } from '../magic-card/magic-card.component';
+import { MagicFormComponent } from '../magic-form/magic-form.component';
+import { getBoosters, getCards } from '../../methods/methods';
+import { Booster, Card } from '../../interfaces/interfaces';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-magic-dashboard',
@@ -48,11 +48,10 @@ export class MagicDashboardComponent {
       }
     }
     this.cardList = cards;
-    
   };
 
   formSubmit = async (nameBlock: string[]) => {
-    this.numberOfDeletedCards = 0
+    this.numberOfDeletedCards = 0;
     this.cardList = [];
     this.boosterList = await getBoosters(nameBlock[0], nameBlock[1]);
   };
