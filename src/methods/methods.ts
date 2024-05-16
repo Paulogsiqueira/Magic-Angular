@@ -34,7 +34,6 @@ export const getBoosters = async (nome: string, bloco: string) => {
     );
     let boosters: Booster[] = [];
     const sets = response.data.sets;
-    console.log(sets);
     sets.forEach((set: Booster) => {
       if (/^[A-Za-z]{3}$/.test(set.code)) {
         boosters.push(set);

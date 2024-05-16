@@ -1,8 +1,8 @@
 <div class="dashboard">
   <app-magic-form (formSubmit)="formSubmit($event)" [loading]="loading" />
   <app-delete-button
+    (deleteSelectedCardsEvent)="deleteCards()"
     *ngIf="cardsSelected.length > 0"
-    (click)="deleteSelectedCards()"
   />
   <p
     class="select-notice"

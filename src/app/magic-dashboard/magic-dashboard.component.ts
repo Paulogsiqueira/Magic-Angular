@@ -39,6 +39,7 @@ export class MagicDashboardComponent {
       cards.splice(30);
     }
     this.cardList = cards;
+    this.loading = false;
     if (cards.length < 30) {
       const newCards = await getCards(block, 3);
       cards = [...cards, ...newCards];
@@ -47,7 +48,7 @@ export class MagicDashboardComponent {
       }
     }
     this.cardList = cards;
-    this.loading = false;
+    
   };
 
   formSubmit = async (nameBlock: string[]) => {
@@ -64,7 +65,7 @@ export class MagicDashboardComponent {
     }
   };
 
-  deleteSelectedCards = async () => {
+  deleteCards = async () => {
     this.numberOfDeletedCards += this.cardsSelected.length;
     let newCardList = this.cardList.filter(
       (value, index) => !this.cardsSelected.includes(index)
