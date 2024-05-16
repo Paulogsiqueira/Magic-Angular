@@ -28,16 +28,19 @@ export class MagicDashboardComponent {
   loading: boolean = false;
   cardsSelected: number[] = [];
   block: string = '';
+  numberOfDeletedCards: number = 0;
 
   boosterSelected = async (block: string) => {
     this.block = block;
     this.loading = true;
     this.boosterList = [];
-    let cards = await getCards(block, 5);
+    let cards = await getCards(block, 4);
     if (cards.length > 30) {
       cards.splice(30);
-    } else if (cards.length < 30) {
-      const newCards = await getCards(block, 2);
+    }
+    this.cardList = cards;
+    if (cards.length < 30) {
+      const newCards = await getCards(block, 3);
       cards = [...cards, ...newCards];
       if (cards.length > 30) {
         cards.splice(30);
@@ -48,6 +51,7 @@ export class MagicDashboardComponent {
   };
 
   formSubmit = async (nameBlock: string[]) => {
+    this.numberOfDeletedCards = 0
     this.cardList = [];
     this.boosterList = await getBoosters(nameBlock[0], nameBlock[1]);
   };
@@ -61,10 +65,10 @@ export class MagicDashboardComponent {
   };
 
   deleteSelectedCards = async () => {
+    this.numberOfDeletedCards += this.cardsSelected.length;
     let newCardList = this.cardList.filter(
       (value, index) => !this.cardsSelected.includes(index)
     );
-    let cardsDelete = this.cardsSelected.length;
     this.cardsSelected = [];
     this.cardList = [];
     this.loading = true;

@@ -1,12 +1,30 @@
 .form-fields
-    margin:5px auto
+    margin: 5px auto
     width: 50%
     display: flex
     justify-content: space-evenly
+    .form-field__input
+        width: 40%
+    .form-field__button
+        height: 60px
+    .disabled-button
+        border: 2px solid #e8e9e999
 
-.form-field__input
-    width: 40%
-.form-field__button
-    height: 60px
-.disabled-button
-    border:2px solid
+@media (max-width: 1350px)
+    .form-fields
+        width: 70%
+
+@media (max-width: 850px)
+    .form-fields
+        width: 90%
+
+@media (max-width: 650px)
+    .form-fields
+        width: 95%
+        .form-field__input
+            width: 35%
+
+@media (max-width: 450px)
+    .form-fields
+        width: 100%
+        

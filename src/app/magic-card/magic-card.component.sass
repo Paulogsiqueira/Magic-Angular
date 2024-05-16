@@ -30,14 +30,25 @@
             margin-bottom: 40px
             display: flex
             align-items: center
-        .magic-card__text
-            img
-                vertical-align: text-bottom
-                
 
     .magic-card__img
         img
             width: 200px
 
 .selected
-    border:2px solid #673ab7
+    border: 2px solid #673ab7
+
+@media (max-width: 500px)
+    .magic-card
+        width: 320px
+        min-height: 380px
+        padding: 10px 4px
+        margin: 10px 0px
+    .magic-card__info
+        .magic-card__details
+            margin-left: 15px
+            h2
+                font-size: 24px
+        .magic-card__img
+            img
+                width: 150px

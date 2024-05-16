@@ -14,6 +14,7 @@ export class MagicCardComponent {
   @Input() card?: Card;
   @Input() index?: number;
   @Input() cardsSelected: number[] = [];
+  @Input() numberOfDeletedCards: number = 0;
   @Output()
   selectCardEvent = new EventEmitter<number>();
   newText: string = '';
@@ -59,10 +60,10 @@ export class MagicCardComponent {
   };
 
   selectCard = () =>{
-    if(this.cardsSelected.length < 5){
+    if(this.cardsSelected.length + this.numberOfDeletedCards < 5){
       this.cardSelected = !this.cardSelected;
       this.selectCardEvent.emit(this.index)
-    }else if(this.cardsSelected.length == 5 && this.cardSelected == true){
+    }else if(this.cardsSelected.length + this.numberOfDeletedCards == 5 && this.cardSelected == true){
       this.cardSelected = false
       this.selectCardEvent.emit(this.index)
     }

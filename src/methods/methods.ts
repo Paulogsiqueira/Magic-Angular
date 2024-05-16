@@ -21,28 +21,11 @@ export const getCards = async (block: string, amount: number) => {
     }
     return cards;
   } catch (error) {
+    alert("Erro ao realizar requisição à API, recarregue a página e tente novamente")
     console.error('Erro ao processar a solicitação:', error);
     throw error;
   }
 };
-
-// export const getCards = async (block: string, amount: number) => {
-//   try {
-//     let cards: Card[] = [];
-//     while( cards.length < amount){
-//       const response = await axios.get(`https://api.magicthegathering.io/v1/sets/${block}/booster`);
-//       response.data.cards.forEach((card: Card) => {
-//         if(card.types.includes("Creature")){
-//           cards.push(card);
-//         }
-//       })
-//     }
-//     return cards;
-//   } catch (error) {
-//     console.error('Erro ao processar a solicitação:', error);
-//     throw error;
-//   }
-// };
 
 export const getBoosters = async (nome: string, bloco: string) => {
   try {

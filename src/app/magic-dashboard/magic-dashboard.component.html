@@ -1,6 +1,28 @@
 <div class="dashboard">
   <app-magic-form (formSubmit)="formSubmit($event)" [loading]="loading" />
-  <app-delete-button *ngIf="cardsSelected.length > 0" (click)="deleteSelectedCards()"/>
+  <app-delete-button
+    *ngIf="cardsSelected.length > 0"
+    (click)="deleteSelectedCards()"
+  />
+  <p
+    class="select-notice"
+    *ngIf="cardList.length > 0 && numberOfDeletedCards < 4"
+  >
+    Obs: Selecione até {{ 5 - numberOfDeletedCards }} cartas para serem
+    substituidas
+  </p>
+  <p
+    class="select-notice"
+    *ngIf="cardList.length > 0 && numberOfDeletedCards == 4"
+  >
+    Obs: Selecione {{ 5 - numberOfDeletedCards }} carta para ser substituida
+  </p>
+  <p
+    class="select-notice"
+    *ngIf="cardList.length > 0 && numberOfDeletedCards == 5"
+  >
+    Você já substituiu 5 cartas
+  </p>
   <div class="dashboard-cardlist">
     <app-magic-booster
       (boosterSelected)="boosterSelected($event)"
@@ -13,6 +35,7 @@
       [index]="i"
       (selectCardEvent)="cardSelected($event)"
       [cardsSelected]="cardsSelected"
+      [numberOfDeletedCards]="numberOfDeletedCards"
     />
     <app-magic-loading *ngIf="loading" />
   </div>
